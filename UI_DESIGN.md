@@ -5,9 +5,16 @@
 
 ---
 
-## 1. 画面仕様・論理解像度
+## 1. 画面仕様・論理解像度・レイヤー構造
 - **論理画面サイズ**: 360 × 640（アスペクト比 9:16）
 - **セーフエリア**: スマートフォンのノッチ・バーを考慮した HUD マージン
+- **レイヤー構造（DOM オーバーレイ）**:
+  - `#game-stage`（`position: relative`）内に以下の 2 層を重ねて配置する。
+    - `#game-canvas`: Canvas 2D / WebGL のゲーム描画レイヤー（`width: 100%; height: 100%; display: block;`）
+    - `#hud-root`: DOM HUD オーバーレイ（`position: absolute; inset: 0; pointer-events: none;`）
+  - `#hud-root` 自体はタッチ透過（`pointer-events: none`）を維持し、操作ボタン等のインタラクティブ要素にのみ個別に `pointer-events: auto` を指定する。
+- **コンセプトアート（任意）**:
+  - `doc/concept-art.*` が配置されている場合は、ビジュアルトーンや画面構成の参照元としてここにリンク・概要を記載する。
 
 ---
 

@@ -2,5 +2,6 @@ node_modules/
 dist/
 certs/
 .superpowers/
+docs/superpowers/
 .DS_Store
 *.local

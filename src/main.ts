@@ -2,6 +2,11 @@ import { SCREEN } from './core/types';
 import { createGame, stepGame } from './core/game';
 import { renderGame } from './shell/renderer';
 
+const stage = document.querySelector<HTMLDivElement>('#game-stage');
+if (!stage) {
+  throw new Error('Stage element #game-stage not found');
+}
+
 const canvas = document.querySelector<HTMLCanvasElement>('#game-canvas');
 if (!canvas) {
   throw new Error('Canvas element #game-canvas not found');
@@ -12,9 +17,9 @@ if (!ctx) {
   throw new Error('Could not get 2D rendering context');
 }
 
-// Fit canvas to display while maintaining 9:16 aspect ratio
+// Fit stage to display while maintaining 9:16 aspect ratio
 function resizeCanvas(): void {
-  if (!canvas) return;
+  if (!stage || !canvas) return;
 
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
@@ -33,13 +38,14 @@ function resizeCanvas(): void {
     displayWidth = windowHeight * targetAspect;
   }
 
+  stage.style.width = `${displayWidth}px`;
+  stage.style.height = `${displayHeight}px`;
+
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   canvas.width = SCREEN.width * dpr;
   canvas.height = SCREEN.height * dpr;
-  canvas.style.width = `${displayWidth}px`;
-  canvas.style.height = `${displayHeight}px`;
 
-  ctx?.scale(dpr, dpr);
+  ctx?.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
 window.addEventListener('resize', resizeCanvas);
