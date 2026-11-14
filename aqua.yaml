@@ -1,0 +1,13 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/aquaproj/aqua/main/json-schema/aqua-yaml.json
+# aqua - Declarative CLI Version Manager
+# https://aquaproj.github.io/
+registries:
+  - type: standard
+    ref: v4.442.0 # renovate: depName=aquaproj/aqua-registry
+  - type: local
+    name: local
+    path: registry.yaml
+packages:
+  - name: joshrotenberg/adrs@v0.13.0
+    registry: local

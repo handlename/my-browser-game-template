@@ -1,0 +1,18 @@
+packages:
+  - type: github_release
+    repo_owner: joshrotenberg
+    repo_name: adrs
+    asset: adrs-{{.Arch}}-{{.OS}}.{{.Format}}
+    format: tar.xz
+    rosetta2: true
+    windows_arm_emulation: true
+    replacements:
+      darwin: apple-darwin
+      linux: unknown-linux-gnu
+      amd64: x86_64
+      arm64: aarch64
+    supported_envs:
+      - darwin
+      - linux
+    files:
+      - name: adrs
