@@ -12,4 +12,5 @@ export interface GameState {
   readonly elapsedSeconds: number;
   readonly tickCount: number;
   readonly isGameOver: boolean;
+  readonly isPaused: boolean;
 }

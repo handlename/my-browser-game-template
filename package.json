@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:host": "vite --host",
     "dev:https": "vite --config vite.https.config.ts",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",

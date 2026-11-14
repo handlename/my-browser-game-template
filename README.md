@@ -39,8 +39,11 @@ bun install
 ## 開発コマンド
 
 ```bash
-# 開発サーバー起動 (HTTP)
+# 開発サーバー起動 (HTTP / localhost)
 bun run dev
+
+# スマホ実機検証用 HTTP 開発サーバー起動 (LAN / Tailscale 経由)
+bun run dev:host
 
 # スマホ実機検証用 HTTPS 開発サーバー起動
 bun run dev:https
@@ -69,6 +72,10 @@ bun run preview
 ├── doc/
 │   └── adr/                      # Architecture Decision Records
 │       └── 0001-record-architecture-decisions.md
+├── docs/
+│   └── references/               # ジャンル別ベストプラクティス・チェックリスト
+│       ├── playtest-and-debugging.md
+│       └── touch-and-input.md
 ├── src/
 │   ├── core/                     # Functional Core (純粋関数・副作用なし)
 │   │   ├── types.ts              # ゲーム状態・解像度の型定義
@@ -102,4 +109,5 @@ bun run preview
 - `UI_DESIGN.md`: 画面レイアウト、HUD レイヤー構成、カラーパレット
 - `GLOSSARY.md`: ゲーム固有のルール用語や登場オブジェクトの定義
 - `doc/adr/`: アーキテクチャ上の意思決定ログ
+- `docs/references/`: ジャンル別の設計指針・チェックリスト（[タッチ・マルチタッチ・HUD 重畳入力](docs/references/touch-and-input.md) / [実機チューニング・自動プレイ検証](docs/references/playtest-and-debugging.md)）
 - `doc/concept-art.*`（任意）: ビジュアルトーンや画面イメージの参照用コンセプトアート（配置した場合、`UI_DESIGN.md` 等から参照する）

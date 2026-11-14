@@ -57,6 +57,11 @@
 - **正本ドキュメントの集約と同期更新**:
   - 最終仕様および意思決定は、リポジトリ直下の正本ドキュメント（`REQUIREMENTS.md` / `DESIGN.md` / `UI_DESIGN.md` / `GLOSSARY.md` / `README.md`）と `doc/adr/` に集約します（`docs/superpowers/` や `.superpowers/` 等の AI 作業用ドキュメントと二重管理しないこと）。
   - 設計承認および ADR 記録のタイミングで、リポジトリ直下の正本ドキュメントも必ず同期更新してください。
+- **ジャンル別ベストプラクティス (`docs/references/`)**:
+  - `docs/references/` には、過去のゲーム開発・実機検証から得られたジャンル別の実装ノウハウ・チェックリストを集約しています（個別ノウハウで本ファイルを肥大化させないための参照先です）。
+  - 該当領域の設計・実装・検証を行う際は、必ず対象ドキュメントを確認してください。
+    - [タッチ・マルチタッチ・HUD 重畳入力](docs/references/touch-and-input.md)
+    - [実機チューニング・自動プレイ検証](docs/references/playtest-and-debugging.md)
 - **セッション引き継ぎ**:
   - 設計・計画セッションと実装セッションを分ける場合は、次セッションへ渡す指示に以下を必ず明記してください。
     - **参照ファイル一覧**: 実装前に確認すべきドキュメント・ADR・対象ファイル
@@ -72,7 +77,8 @@
 - **ランタイム・ツール**:
   - 言語ランタイム（Bun）: `mise.toml` で管理（`/Users/handlename/.local/share/mise/shims/bun` 等）。
   - CLI ツール（`adrs` 等）: `aqua.yaml` で管理。
-- **実機検証用 HTTPS 開発サーバー**:
+- **実機検証用開発サーバー (HTTP / HTTPS)**:
+  - 通常のタッチ操作や画面表示を LAN / Tailscale 経由のスマホ実機から手早く確認する場合は、HTTP で外部公開する `bun run dev:host` を使用できます。
   - iOS Safari 等でジャイロセンサー（`DeviceMotionEvent` / `DeviceOrientationEvent`）や Web Share API を動作させるにはセキュアコンテキスト（HTTPS）が必須です。
   - プロジェクトルートに `certs/key.pem` と `certs/cert.pem` を配置し、HTTPS サーバーを起動できます:
     ```bash
@@ -84,7 +90,8 @@
 
 ## 6. コマンドリファレンス
 
-- **開発サーバー起動 (HTTP)**: `bun run dev`
+- **開発サーバー起動 (HTTP / localhost)**: `bun run dev`
+- **実機向け開発サーバー起動 (HTTP / LAN・Tailscale)**: `bun run dev:host`
 - **実機向け開発サーバー起動 (HTTPS)**: `bun run dev:https`
 - **単体テスト実行**: `bun run test`
 - **型検査 & 本番ビルド**: `bun run build`

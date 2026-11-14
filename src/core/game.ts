@@ -5,11 +5,23 @@ export function createGame(): GameState {
     elapsedSeconds: 0,
     tickCount: 0,
     isGameOver: false,
+    isPaused: false,
+  });
+}
+
+export function setPaused(state: GameState, isPaused: boolean): GameState {
+  if (state.isPaused === isPaused) {
+    return state;
+  }
+
+  return Object.freeze({
+    ...state,
+    isPaused,
   });
 }
 
 export function stepGame(state: GameState, dtSeconds: number): GameState {
-  if (state.isGameOver) {
+  if (state.isGameOver || state.isPaused) {
     return state;
   }
 
